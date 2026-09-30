@@ -1,0 +1,45 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "flowdesk-rag"
+version = "1.0.0"
+description = "A customer-support RAG assistant using FastAPI and OpenAI File Search"
+requires-python = ">=3.11"
+dependencies = [
+  "fastapi>=0.115,<1",
+  "openai>=2,<4",
+  "pydantic-settings>=2.8,<3",
+  "openpyxl>=3.1,<4",
+  "pypdf>=5,<7",
+  "python-docx>=1.1,<2",
+  "python-pptx>=1.0,<2",
+  "python-dotenv>=1.0,<2",
+  "python-multipart>=0.0.20,<1",
+  "pillow>=11,<13",
+  "uvicorn[standard]>=0.34,<1",
+]
+
+[project.optional-dependencies]
+dev = [
+  "httpx>=0.28,<1",
+  "pytest>=8.3,<10",
+  "pytest-cov>=6,<8",
+  "pytest-asyncio>=0.25,<2",
+  "ruff>=0.9,<1",
+]
+
+[tool.hatch.build.targets.wheel]
+packages = ["backend"]
+
+[tool.pytest.ini_options]
+testpaths = ["backend/tests"]
+addopts = "-q"
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP"]
